@@ -4,34 +4,42 @@ class Input{
 	//constructor takes in a a target input element
 	//should also construct variables for the range, the pattern, and the element that will hold the error message
 	//range min and max should default to null
-	constructor( ){
+	constructor(input, range, pattern, message ){
+		this.input=input;
+		this.minRange=null;
+		this.pattern=0;
+		this.message= message;
+		this.maxRange=null;
 
 	}
 	//setRange sets the minimum and maximum range, if necessary, for the input
 	//arguments : min (a number), and max (a number)
 	//returns: nothing
 	//purpose: sets the min and max values for the object
-	setRange(  ){
-
+	setRange(min, max ){
+		  this.min=Math.min.apply(null,this.input);
+		  this.max=Math.max.apply(null,this.input);
 	}
 	//getRange gets the minimum and maximum range.
 	//arguments: nothing
 	//returns: an object with a property of min, and a property of max, containing the minimum and maximum numbers
 	getRange(){
-		
+		return this.input(this.max);
+		return this.input(this.max);
 	}
 	//setPattern saves a regex pattern into the object
 	//arguments: pattern (a regular expression.  if you don't know what it is, you will learn it soon)
 	//returns: nothing
 	//saves the given pattern into the object
-	setPattern(  ){
-		
+	setPattern( pattern ){
+			this.pattern.test(this.input);
 	}
 	//getPattern returns the currently stored pattern of the input object
 	//arguments: nothing
 	//returns: the currently stored regex pattern
 	getPattern(){
-		
+         
+		return this.pattern = new RegExp(input);
 	}
 	//test runs all current tests on the target input and returns an object with data about whether the input passed or not
 	//arguments: nothing
@@ -48,8 +56,21 @@ class Input{
 
 		also needs to test the range, but note that the range is null by default
 		if it is still null, no range has been set, so don't test it
-			if it is not null, then test the range */
+		
+		
+		
+		if it is not null, then test the range */
 	test(){
+		this.pattern.test(this.input);
+
+        if(this.input.val() != this.pattern.RegExp(this.input)){
+			this.error= pattern;
+			return result=
+		}
+		if()
+
+
+
 
 	}
 	/*
