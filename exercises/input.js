@@ -32,7 +32,7 @@ class Input{
 	//returns: nothing
 	//saves the given pattern into the object
 	setPattern( pattern ){
-			this.pattern.test(this.input);
+			   this.pattern = new RegExp(input);
 	}
 	//getPattern returns the currently stored pattern of the input object
 	//arguments: nothing
@@ -61,15 +61,16 @@ class Input{
 		
 		if it is not null, then test the range */
 	test(){
+		var getInputVal= this.input.val();
 		this.pattern.test(this.input);
 
-        if(this.input.val() != this.pattern.RegExp(this.input)){
+        if(getInputVal != this.pattern.RegExp(this.input)){
 			this.error= pattern;
 			return result=
 		}
-		if()
-
-
+		if(this.input.val() != this.min){
+			this.error=range;
+		}
 
 
 	}
@@ -77,7 +78,7 @@ class Input{
 	showError: takes in a message, creates a dom element, and then positions that dom Element directly below the input
 	argument: message (a string)
 	returns: nothing
-	notes: should create an element and positio it directly beneath the input
+	notes: should create an element and position it directly beneath the input
 		you will need to get the position of the input  (https://www.w3schools.com/jquery/css_position.asp)
 		also find the height of the element (https://www.w3schools.com/jquery/css_height.asp)
 		make a new dom element
@@ -90,16 +91,29 @@ class Input{
 		MAKE SURE TO STORE the reference to the dom element in the object for later use!
 		Don't store the CSS selector, you made the element, store the direct dom object itself!
 		*/
-	showError(  ){
-
+	showError( message ){
+		var this.newElement = ('<div>')
+		      .css('position', )
+	
+	  var this.messageDom =('<div>')
+			  this.messageDom.css('position', x.left)
+			  this.messageDom.css('position', x.right)
+			   .css('height',)
+			   addClass('inputError')
+			   this.messageDom.text(this.message);
+			 
+	
+			.addClass('bowl')
+			.css('background-color', this.baseColor )
+			.click( this.clickHandler )
 	}
-	/*
-	hideError removes the error dom element from the DOM for the given input
-	arguments: none
-	returns: none
-	note: 
-		removes the dom element in question (https://www.w3schools.com/jquery/html_remove.asp)
-		*/
+	
+	// hideError removes the error dom element from the DOM for the given input
+	// arguments: none
+	// returns: none
+	// note: 
+	// 	removes the dom element in question (https://www.w3schools.com/jquery/html_remove.asp)
+	// 	*/
 	hideError(){
 		
 	}
