@@ -10,46 +10,35 @@ class Input{
 		this.pattern=0;
 		this.message= null;
 		this.maxRange=null;
+		this.newDomElement=null;
 		this.newElement=null;
 		this.error=null;
-		this.testResult={};
-
+		 this.testResult={};
+		 this.position=null;
+		 this.messageDomElement=null;
 	}
-	//setRange sets the minimum and maximum range, if necessary, for the input
-	//arguments : min (a number), and max (a number)
-	//returns: nothing
-	//purpose: sets the min and max values for the object
+	
 	setRange(min, max ){
 		 this.minRange=min;
 		 this.maxRange =max;
 
 	}
-	//getRange gets the minimum and maximum range.
-	//arguments: nothing
-	//returns: an object with a property of min, and a property of max, containing the minimum and maximum numbers
 	getRange(){
-		var storeMinAndMAx= {
+		var storeMinAndMax= {
 			min:this.min,
 			max:this.max
 		}
-		return storeMinAndMAx;
+		return storeMinAndMax;
 	}
-	//setPattern saves a regex pattern into the object
-	//arguments: pattern (a regular expression.  if you don't know what it is, you will learn it soon)
-	//returns: nothing
-	//saves the given pattern into the object
+
 	setPattern( regexPattern ){
 			   this.pattern = regexPattern;
 	}
-	//getPattern returns the currently stored pattern of the input object
-	//arguments: nothing
-	//returns: the currently stored regex pattern
+
 	getPattern(){
-         
 		return this.pattern;
 	}
 	//test runs all current tests on the target input and returns an object with data about whether the input passed or not
-	//arguments: nothing
 	//returns: an object with a property of result (true/false), and an optional property of "error" if result was false
 		//if the input's value failed because it didn't match the regex pattern, error will be "pattern"
 		//if the input's value failed because it didn't match the range, error will be "range"
@@ -70,28 +59,30 @@ class Input{
 	test(){
 		var getInputVal= this.pattern.test(this.input.val());
 		
-
-        if(getInputVal !=this.pattern){
-			this.error= 'pattern';
-			this.testResult.result=false;
-			this.testResult['error']=true;
+        if(!getInputVal){
+			this.testResult.error= 'pattern';
+			this.testResult['result']=false;
+			return this.testResult;
+		}
+			else if(getInputVal === null || getInputVal < this.minRange){
+				this.testResult.error='range';
+				this.testResult['result']=false;
+			    return this.testResult;
+			}
+			else if(getInputVal ===null || getInputVal > this.minRange){
+				this.testResult.error='range';
+				this.testResult['error']=false;
+			    return this.testResult;
+			}
+			else{
+				this.testResult.result=true;
+				return this.testResult;
+			}
 			
+			
+		}
+		
 
-		if(getRangeVal != this.min){
-			this.error='range';
-			this.testResult.result=false;
-			this.testResult['error']=true;
-		}
-		if(getRangeVal != this.max){
-			this.error='range';
-			this.testResult.result=false;
-			this.testResult['error']=true;
-		}
-	}
-		   
-		   return this.testResult;
-		  
-	}
 		
 	/*
 	showError: takes in a message, creates a dom element, and then positions that dom Element directly below the input
@@ -110,22 +101,23 @@ class Input{
 		MAKE SURE TO STORE the reference to the dom element in the object for later use!
 		Don't store the CSS selector, you made the element, store the direct dom object itself!
 		*/
+
 	showError( message ){
-	// 	var this.newElement = ('<div>')
-	// 	      .css('position', )
+		 this.newDomElement = ('<div>')
+		 this.newElement =(".inputContainer");
+		 this.position= this.newElement.position();
+		 this.newDomElement.css(this.position.bottom)
+		 this.newDomElement.height();  
 	
-	//   var this.messageDom =('<div>')
-	// 		  this.messageDom.css('position', x.left)
-	// 		  this.messageDom.css('position', x.right)
-	// 		   .css('height',)
-	// 		   addClass('inputError')
-	// 		 //  this.messageDom.text(this.message);
-			 
+	   this.messageDomElement =('<div>')
+	    this.newElement.parent().css({position:'relative'});
+		this.newElement.css({top:10, left:0,})
+		.addClass('inputError')
+		.text(message)
+		this.newDomElement.parent().append(this.messageDomElement);
 	
-	// 		.addClass('bowl')
-	// 		.css('background-color', this.baseColor )
-	// 		.click( this.clickHandler )
-	}
+			
+			
 	
 	// hideError removes the error dom element from the DOM for the given input
 	// arguments: none
