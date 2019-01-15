@@ -14,13 +14,14 @@ class Input{
 		this.newElement=null;
 		this.error=null;
 		 this.testResult={};
-		 this.position=null;
+		 
 		 this.messageDomElement=null;
 	}
 	
 	setRange(min, max ){
-		 this.minRange=min;
-		 this.maxRange =max;
+	
+		 this.min=min;
+		 this.max=max;
 
 	}
 	getRange(){
@@ -57,19 +58,19 @@ class Input{
 		
 		if it is not null, then test the range */
 	test(){
-		var getInputVal= this.pattern.test(this.input.val());
+		var getInputVal= parseInt(this.input.val());
 		
-        if(!getInputVal){
+        if(!this.pattern.test(getInputVal)){
 			this.testResult.error= 'pattern';
 			this.testResult['result']=false;
 			return this.testResult;
 		}
-			else if(getInputVal === null || getInputVal < this.minRange){
+			else if(getInputVal === null || getInputVal < this.min){
 				this.testResult.error='range';
 				this.testResult['result']=false;
 			    return this.testResult;
 			}
-			else if(getInputVal ===null || getInputVal > this.minRange){
+			else if(getInputVal ===null || getInputVal > this.max){
 				this.testResult.error='range';
 				this.testResult['error']=false;
 			    return this.testResult;
@@ -103,20 +104,24 @@ class Input{
 		*/
 
 	showError( message ){
-		 this.newDomElement = ('<div>')
 		 this.newElement =(".inputContainer");
-		 this.position= this.newElement.position();
-		 this.newDomElement.css(this.position.bottom)
-		 this.newDomElement.height();  
-	
-	   this.messageDomElement =('<div>')
+		 var inputPosition= this.input.position();
+		 var inputHeight= this.input.height();
+		  
+		 this.newElement.css("inputPosition.left").toString();
+		 this.newElement.css("inputHeight + 1").toString();
+		  
+	   
+
 	    this.newElement.parent().css({position:'relative'});
-		this.newElement.css({top:10, left:0,})
-		.addClass('inputError')
-		.text(message)
-		this.newDomElement.parent().append(this.messageDomElement);
+		this.newElement.css(inputPosition + "px");
+		this.newElement.css(inputHeight + "px");
+		this.newElement.addClass("inputError");
+		this.newElement.text(message);
+
+		this.input.parent().append(this.newElement);
 	
-			
+	}		
 			
 	
 	// hideError removes the error dom element from the DOM for the given input
@@ -126,6 +131,6 @@ class Input{
 	// 	removes the dom element in question (https://www.w3schools.com/jquery/html_remove.asp)
 	// 	*/
 	hideError(){
-		
+		this.messageDomElement.remove();
 	}
 }
